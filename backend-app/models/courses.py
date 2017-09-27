@@ -32,7 +32,7 @@ class CourseModel():
         '''
         idで指定したコースを返す
         '''
-        course_data = self.session.query(Course).filter_by(id=id)
+        course_data = self.session.query(Course).filter_by(id=id).first()
         return [course_data]
 
     def register_course(self, url, course_name, distance):

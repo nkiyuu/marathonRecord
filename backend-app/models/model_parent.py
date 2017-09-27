@@ -41,7 +41,7 @@ class Course(Base):
     '''
     __tablename__ = 'courses'
     id = Column(Integer, primary_key=True)
-    course_name = Column(Text, nullable=False)
+    course_name = Column(Text, unique=True, nullable=False)
     url = Column(Text, nullable=False)
     distance = Column(REAL, nullable=False)
     create_at = Column(Date, server_default=sqlalchemy.sql.func.now())
