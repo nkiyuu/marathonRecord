@@ -1,5 +1,5 @@
 import sqlite3
-import sqlalchemy
+from sqlalchemy import *
 import sqlalchemy.sql
 import sqlalchemy.orm
 import sqlalchemy.ext.declarative
@@ -14,20 +14,43 @@ engine = sqlalchemy.create_engine(url, echo=True)
 Session = sqlalchemy.orm.sessionmaker(bind=engine)
 
 
-class UserModel(Base):
+class User(Base):
     '''
     usersテーブルのカラム
     '''
     __tablename__ = 'users'
-    id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True)
-    name = sqlalchemy.Column(sqlalchemy.Text, unique=True, nullable=False)
-    created_at = sqlalchemy.Column(sqlalchemy.Date, server_default=sqlalchemy.sql.func.now(), nullable=False)
-    delete_at = sqlalchemy.Column(sqlalchemy.Text, default=None)
+    id = Column(Integer, primary_key=True)
+    name = Column(Text, unique=True, nullable=False)
+    created_at = Column(Date, server_default=sqlalchemy.sql.func.now(), nullable=False)
+    delete_at = Column(sqlalchemy.Text, default=None)
+
+
+class Record(Base):
+    '''
+    recordsテーブルのカラム
+    '''
+    __tablename__ = 'records'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, nullable=False)
+    course = Column(Integer, nullable=False)
+    time = Column(Text, nullable=False)
+    date = Column(Date, server_default=sqlalchemy.sql.func.now(), nullable=False)
+    create_at = Column(Date, server_default=sqlalchemy.sql.func.now())
+    delete_at = Column(Date)
+
+
+class Course(Base):
+    '''
+    coursesテーブルのカラム
+    '''
+    __tablename__ = 'courses'
+    id = Column(Integer, primary_key=True)
+    url = Column(Text, nullable=False)
+    distance = Column(REAL, nullable=False)
 
 
 def create_tables():
     '''
     テーブルデータの作成
-    :return:
     '''
     Base.metadata.create_all(engine)

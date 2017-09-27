@@ -1,6 +1,14 @@
-import flask
+from flask import Flask
+from controllers import users
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
+
+
+apps = [
+    users.app,
+]
+for a in apps:
+    app.register_blueprint(a)
 
 
 @app.route('/')
