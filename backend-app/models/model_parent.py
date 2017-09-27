@@ -3,14 +3,9 @@ from sqlalchemy import *
 import sqlalchemy.sql
 import sqlalchemy.orm
 import sqlalchemy.ext.declarative
-from sqlalchemy.dialects.sqlite import DATE
-import datetime
-
-from config import DB_PATH
-
 Base = sqlalchemy.ext.declarative.declarative_base()
 url = 'sqlite:///' + DB_PATH
-engine = sqlalchemy.create_engine(url, echo=True)
+engine = sqlalchemy.create_engine(url)
 Session = sqlalchemy.orm.sessionmaker(bind=engine)
 
 
