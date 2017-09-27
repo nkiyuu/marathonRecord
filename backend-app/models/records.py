@@ -29,7 +29,7 @@ class RecordModel():
         if user_id != -1:
             records_data = records_data.filter_by(user_id=user_id)
         if course_id != -1:
-            records_data = records_data.filter_by(course=course_id)
+            records_data = records_data.filter_by(course_id=course_id)
         records_data = records_data.all()
         self.session.flush()
         return records_data
@@ -49,7 +49,7 @@ class RecordModel():
         if date:
             tdate = datetime.datetime.strptime(date, '%Y-%m-%d')
             date = datetime.date(tdate.year, tdate.month, tdate.day)
-        new_record = Record(user_id=user_id,course=course_id, time=time, date=date)
+        new_record = Record(user_id=user_id,course_id=course_id, time=time, date=date)
         self.session.add(new_record)
         self.session.flush()
         self.session.commit()
