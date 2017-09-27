@@ -1,11 +1,12 @@
 from flask import Flask
-from controllers import users
+from controllers import users, records
 
 app = Flask(__name__)
 
 
 apps = [
     users.app,
+    records.app,
 ]
 for a in apps:
     app.register_blueprint(a)
